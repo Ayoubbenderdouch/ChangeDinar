@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="de" style="background: linear-gradient(135deg, #0a192f 0%, #050c17 100%);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Dinar - Premium Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --gold: #d4af37;
+            --blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --navy: #0a192f;
+            --deep-navy: #050c17;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+            height: 100vh;
+            width: 100vw;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .scene {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+        }
+        
+        .floating-currencies {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .currency {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            animation: floatCurrency 15s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes floatCurrency {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .backdrop {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(26, 115, 232, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: 0;
+        }
+        
+        /* Background elements */
+        .orbit {
+            position: fixed;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 5;
+        }
+        
+        .orbit-1 {
+            width: 100vmin;
+            height: 100vmin;
+            animation: orbitRotate 30s linear infinite;
+        }
+        
+        .orbit-2 {
+            width: 150vmin;
+            height: 150vmin;
+            animation: orbitRotate 45s linear infinite reverse;
+        }
+        
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .orbit-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Download buttons area */
+        .download-area {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 400px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 480px) {
+            .download-area {
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .iphone-container {
+                width: 70%;
+                max-height: 55vh;
+            }
+        }
+        
+        .download-button {
+            position: relative;
+            overflow: hidden;
+            width: 140px;
+            max-width: 45%;
+            padding: 10px 0;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            touch-action: manipulation; /* Improved touch for mobile */
+        }
+        
+        .ios-button {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.3), rgba(0, 122, 255, 0.1));
+        }
+        
+        .android-button {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.3), rgba(0, 200, 83, 0.1));
+        }
+        
+        .download-button:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-button:active {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+        
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            animation: shineButton 3s infinite;
+            z-index: -1;
+        }
+        
+        @keyframes shineButton {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+        
+        .button-icon {
+            font-size: calc(10px + 1vmin);
+            margin-bottom: 3px;
+        }
+        
+        .button-text {
+            font-size: calc(6px + 1vmin);
+            font-weight: 600;
+        }
+        
+        .button-subtext {
+            font-size: calc(4px + 1vmin);
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        /* --- NEUE PREMIUM-ELEMENTE --- */
+        
+        /* Premium iPhone Container */
+        .premium-iphone-container {
+            position: relative;
+            width: 70%;
+            max-width: 300px;
+            height: 60vh;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            z-index: 10;
+        }
+        
+        .iphone-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .iphone-image {
+            max-width: 100%;
+            max-height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease-out;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotateX(2deg) rotateY(3deg);
+            }
+            50% {
+                transform: translateY(0px) rotateX(0deg) rotateY(-3deg);
+            }
+            75% {
+                transform: translateY(10px) rotateX(-2deg) rotateY(0deg);
+            }
+            100% {
+                transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+            }
+        }
+        
+        /* Glänzende Reflexion auf dem iPhone */
+        .iphone-shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0) 45%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0) 55%,
+                transparent 100%
+            );
+            pointer-events: none;
+            animation: shineEffect 8s infinite;
+            z-index: 15;
+        }
+        
+        @keyframes shineEffect {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) translateY(-100%);
+            }
+            20% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            40% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%) translateY(100%);
+            }
+        }
+        
+        /* Glowing Effect um das iPhone */
+        .iphone-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            filter: blur(20px);
+            background: radial-gradient(
+                circle at center,
+                rgba(26, 115, 232, 0.2) 0%,
+                rgba(26, 115, 232, 0) 70%
+            );
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+            z-index: 5;
+        }
+        
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Glowing Particles um das iPhone */
+        .particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 8;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold);
+            animation: particleFloat 10s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(var(--x-end, 20px));
+                opacity: 0;
+            }
+        }
+        
+        /* Premium Title */
+        .premium-title {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: calc(16px + 1.5vmin);
+            color: white;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            animation: fadeInDown 1s ease;
+            z-index: 20;
+        }
+        
+        .premium-title span {
+            background: linear-gradient(to right, #ffffff, var(--gold), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* Wechselkurs Anzeige */
+        .exchange-rate-container {
+            position: relative;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            z-index: 20;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+        
+        .exchange-rate {
+            display: flex;
+            align-items: center;
+            font-size: calc(10px + 1vmin);
+            font-weight: 500;
+        }
+        
+        .currency-from {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        .currency-to {
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .exchange-arrow {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom animation for premium label */
+        .premium-label {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
+            color: var(--deep-navy);
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transform: rotate(15deg);
+            z-index: 25;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: rotate(15deg) translateY(0);}
+            40% {transform: rotate(15deg) translateY(-10px);}
+            60% {transform: rotate(15deg) translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="backdrop"></div>
+        <div class="floating-currencies" id="currencies"></div>
+        
+        <div class="orbit orbit-1">
+            <div class="orbit-dot" style="top: 0; left: 50%;"></div>
+            <div class="orbit-dot" style="bottom: 0; left: 50%;"></div>
+            <div class="orbit-dot" style="left: 0; top: 50%;"></div>
+            <div class="orbit-dot" style="right: 0; top: 50%;"></div>
+        </div>
+        
+        <div class="orbit orbit-2">
+            <div class="orbit-dot" style="top: 20%; left: 10%;"></div>
+            <div class="orbit-dot" style="top: 70%; right: 20%;"></div>
+            <div class="orbit-dot" style="bottom: 15%; left: 30%;"></div>
+        </div>
+        
+        <!-- Premium Titel -->
+        <div class="premium-title">
+            <span>Change Dinar</span>
+        </div>
+        
+        <!-- Premium iPhone Container -->
+        <div class="premium-iphone-container" id="premium-iphone">
+            <div class="iphone-glow"></div>
+            <div class="particles-container" id="particles"></div>
+            <div class="iphone-wrapper">
+                <img src="iphone.png" alt="iPhone mit Change Dinar App" class="iphone-image" id="iphone-image">
+                <div class="iphone-shine"></div>
+                <div class="premium-label">Premium</div>
+            </div>
+        </div>
+        
+        <!-- Exchange Rate Display -->
+        <div class="exchange-rate-container">
+            <div class="exchange-rate">
+                <div class="currency-from">1 EUR</div>
+                <div class="exchange-arrow">→</div>
+                <div class="currency-to">251 DZD</div>
+            </div>
+        </div>
+        
+        <div class="download-area">
+            <a href="#" class="download-button ios-button" id="ios-link">
+                <div class="button-icon">
+                    <img src="appel.svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path>
+                        <path d="M10 2c1 .5 2 2 2 5"></path>
+                    </img>
+                </div>
+                <div class="button-text">App Store</div>
+                <div class="button-subtext">Télécharger</div>
+            </a>
+            
+            <a href="#" class="download-button android-button" id="android-link">
+                <div class="button-icon">
+                    <img src="play.png" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </img>
+                </div>
+                <div class="button-text">Google Play</div>
+                <div class="button-subtext">Télécharger</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // App Store Links - Ersetzen Sie diese mit Ihren tatsächlichen Links
+        const iOS_APP_LINK = "https://apps.apple.com/us/app/change-dinar/id6742030993";
+        const ANDROID_APP_LINK = "https://play.google.com/store/apps/details?id=com.zaed.changedinar";
+        
+        // Funktion zum Erkennen des Betriebssystems
+        function detectOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // iOS Erkennung
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return "iOS";
+            }
+            
+            // Android Erkennung
+            if (/android/i.test(userAgent)) {
+                return "Android";
+            }
+            
+            // Andere Betriebssysteme
+            return "other";
+        }
+        
+        // Schwebende Währungssymbole erstellen
+        function createFloatingCurrencies() {
+            const container = document.getElementById('currencies');
+            const symbols = ['$', '€', '£', '¥', '₽', '₹', 'د.ع', '₩', '₺', 'CHF', 'AED', 'SAR'];
+            const numSymbols = Math.min(30, Math.floor(window.innerWidth / 30)); // Anzahl der Symbole an Bildschirmgröße anpassen
+            
+            for (let i = 0; i < numSymbols; i++) {
+                const symbol = document.createElement('div');
+                symbol.classList.add('currency');
+                
+                // Zufälliges Symbol aus der Liste
+                const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.textContent = randomSymbol;
+                
+                // Zufällige Position, Größe und Animation
+                const posX = Math.random() * 100;
+                const size = Math.random() * 16 + 10;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 10;
+                
+                symbol.style.left = `${posX}%`;
+                symbol.style.fontSize = `${size}px`;
+                symbol.style.animationDuration = `${duration}s`;
+                symbol.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(symbol);
+            }
+        }
+        
+        // Dynamischer 3D-Effekt für iPhone
+        function init3DEffect() {
+            const iphoneImage = document.getElementById('iphone-image');
+            const iphoneContainer = document.getElementById('premium-iphone');
+            
+            if (!iphoneImage) return;
+            
+            document.addEventListener('mousemove', (e) => {
+                if (window.innerWidth <= 768) return; // Nur auf Desktop
+                
+                const rect = iphoneContainer.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const xAxis = (centerX - e.clientX) / 20;
+                const yAxis = (centerY - e.clientY) / 20;
+                
+                iphoneImage.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            document.addEventListener('mouseleave', () => {
+                iphoneImage.style.transform = ''; // Zurück zur ursprünglichen Position
+            });
+        }
+        
+        // Schwebende Partikel erstellen
+        function createParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+            
+            // Container leeren
+            container.innerHTML = '';
+            
+            const numParticles = 15;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Zufällige Position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const size = Math.random() * 3 + 1;
+                const xEnd = (Math.random() - 0.5) * 100;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.setProperty('--x-end', `${xEnd}px`);
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Weiterleitung basierend auf Betriebssystem
+        function handleRedirect() {
+            const os = detectOS();
+            const iosLink = document.getElementById('ios-link');
+            const androidLink = document.getElementById('android-link');
+            
+            if (!iosLink || !androidLink) return;
+            
+            // Update Links
+            iosLink.href = iOS_APP_LINK;
+            androidLink.href = ANDROID_APP_LINK;
+            
+            // Automatisch hervorheben basierend auf dem erkannten Betriebssystem
+            if (os === "iOS") {
+                iosLink.style.transform = "scale(1.05)";
+                iosLink.style.boxShadow = "0 10px 30px rgba(0, 122, 255, 0.3)";
+            } else if (os === "Android") {
+                androidLink.style.transform = "scale(1.05)";
+                androidLink.style.boxShadow = "0 10px 30px rgba(0, 200, 83, 0.3)";
+            }
+            
+            // Touch-Ereignisse verbessern
+            iosLink.addEventListener('touchstart', function() {
+                this.style.transform = "scale(0.95)";
+            });
+            
+            iosLink.addEventListener('touchend', function() {
+                if (os === "iOS") {
+                    this.style.transform = "scale(1.05)";
+                } else {
+                    this.style.transform = "scale(1)";
+                }
+            });
+            
+            androidLink.addEventListener('touchstart', function() {
+                this.style.transform = "scale(0.95)";
+            });
+            
+            androidLink.addEventListener('touchend', function() {
+                if (os === "Android") {
+                    this.style.transform = "scale(1.05)";
+                } else {
+                    this.style.transform = "scale(1)";
+                }
+            });
+        }
+        
+        // Wechselkurs Animation
+        function animateExchangeRate() {
+            const rates = [
+                { from: "1 EUR", to: "252 DZD" },
+                { from: "1 USD", to: "241 DZD" }
+            ];
+            
+            const fromElement = document.querySelector('.currency-from');
+            const toElement = document.querySelector('.currency-to');
+            
+            if (!fromElement || !toElement) return;
+            
+            let index = 0;
+            
+            setInterval(() => {
+                // Fade out
+                fromElement.style.opacity = 0;
+                toElement.style.opacity = 0;
+                
+                setTimeout(() => {
+                    // Update text
+                    index = (index + 1) % rates.length;
+                    fromElement.textContent = rates[index].from;
+                    toElement.textContent = rates[index].to;
+                    
+                    // Fade in
+                    fromElement.style.opacity = 1;
+                    toElement.style.opacity = 1;
+                }, 500);
+            }, 4000);
+        }
+        
+        // Hauptfunktion
+        function init() {
+            createFloatingCurrencies();
+            init3DEffect();
+            createParticles();
+            handleRedirect();
+            animateExchangeRate();
+            
+            // Bildschirmgröße ändern
+            window.addEventListener('resize', function() {
+                document.getElementById('currencies').innerHTML = '';
+                createFloatingCurrencies();
+                createParticles();
+            });
+        }
+        
+        // Seite initialisieren
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
