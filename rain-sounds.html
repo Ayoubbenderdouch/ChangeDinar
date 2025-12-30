@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rain Sounds - Sleep & Relaxing. Fall asleep faster with calming nature sounds.">
+    <meta name="keywords" content="rain sounds, sleep app, relaxation, nature sounds, meditation, white noise">
+    <title>Rain Sounds - Sleep & Relaxing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Rain Animation */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(transparent, rgba(174, 194, 224, 0.5));
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        /* Phone Mockup */
+        .phone-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .phone {
+            width: 280px;
+            height: 570px;
+            background: linear-gradient(145deg, #2d3748, #1a202c);
+            border-radius: 45px;
+            padding: 12px;
+            box-shadow:
+                0 50px 100px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(116, 185, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .phone:hover {
+            transform: rotateY(-5deg) rotateX(5deg);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 100%);
+            border-radius: 35px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .phone-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .now-playing {
+            margin-top: 30px;
+        }
+
+        .sound-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .sound-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .sound-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Sound Wave Animation */
+        .sound-wave {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 4px;
+            height: 60px;
+            margin: 30px 0;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: linear-gradient(to top, #74b9ff, #a29bfe);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20px; }
+            50% { height: 50px; }
+        }
+
+        .wave-bar:nth-child(1) { animation-delay: 0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(7) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(8) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(9) { animation-delay: 0s; }
+
+        .timer-badge {
+            display: inline-block;
+            background: rgba(116, 185, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #74b9ff;
+        }
+
+        /* Features */
+        .features {
+            max-width: 400px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            min-width: 50px;
+        }
+
+        .feature-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #74b9ff;
+        }
+
+        .feature-text p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        /* Download Buttons */
+        .download-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .download-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn.ios {
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            border: none;
+        }
+
+        .download-btn.ios:hover {
+            background: linear-gradient(135deg, #a29bfe, #74b9ff);
+        }
+
+        .download-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .btn-text {
+            text-align: left;
+        }
+
+        .btn-text span {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .btn-text strong {
+            font-size: 1.1rem;
+        }
+
+        /* Sound Categories */
+        .sound-categories {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .sound-categories h2 {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .category-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .category-card h4 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                gap: 40px;
+            }
+
+            .phone {
+                width: 240px;
+                height: 490px;
+            }
+
+            .features {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rain-container" id="rainContainer"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">🌧️</div>
+            <h1>Rain Sounds</h1>
+            <p class="tagline">Sleep & Relaxing - Fall asleep faster with calming nature sounds</p>
+        </header>
+
+        <div class="main-content">
+            <div class="phone-container">
+                <div class="phone" id="phone">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="phone-content">
+                            <div class="now-playing">
+                                <div class="sound-icon">🌧️</div>
+                                <div class="sound-title">Thunder Storm</div>
+                                <div class="sound-subtitle">Rain Collection</div>
+                            </div>
+                            <div class="sound-wave">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                            <div class="timer-badge">⏱️ Sleep Timer: 1 hour</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎵</div>
+                    <div class="feature-text">
+                        <h3>15+ Premium Sounds</h3>
+                        <p>Rain, Ocean Waves, Fireplace, Thunder Storm and more HD sounds</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎬</div>
+                    <div class="feature-text">
+                        <h3>HD Video Backgrounds</h3>
+                        <p>Beautiful visuals accompanying each sound for immersive experience</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-text">
+                        <h3>Smart Sleep Timer</h3>
+                        <p>Set 30 min, 1 hour, 2 hours or custom timer with fade-out</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📴</div>
+                    <div class="feature-text">
+                        <h3>Works Offline</h3>
+                        <p>No internet needed. Play sounds anywhere, anytime</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sound-categories">
+            <h2>Sound Collections</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="icon">🌧️</div>
+                    <h4>Rain</h4>
+                </div>
+                <div class="category-card">
+                    <div class="icon">⛈️</div>
+                    <h4>Thunder</h4>
+                </div>
+                <div class="category-card">
+                    <div class="icon">🌊</div>
+                    <h4>Ocean</h4>
+                </div>
+                <div class="category-card">
+                    <div class="icon">🔥</div>
+                    <h4>Fireplace</h4>
+                </div>
+                <div class="category-card">
+                    <div class="icon">🌲</div>
+                    <h4>Forest</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>Download Now - It's Free</h2>
+            <div class="download-buttons">
+                <a href="https://apps.apple.com/us/app/rain-sounds-sleep-relaxing/id6754724177" class="download-btn ios" id="iosBtn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    <div class="btn-text">
+                        <span>Download on the</span>
+                        <strong>App Store</strong>
+                    </div>
+                </a>
+                <a href="#" class="download-btn android" id="androidBtn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-1.4-.59-2.96-.92-4.61-.92s-3.21.33-4.61.92L5.41 5.67c-.19-.29-.58-.38-.87-.2-.28.18-.37.54-.22.83L6.18 9.5C3.29 11.25 1.44 14.23 1 17.68h21.81c-.43-3.45-2.28-6.43-5.21-8.2zM7 15.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm10 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/>
+                    </svg>
+                    <div class="btn-text">
+                        <span>Coming Soon on</span>
+                        <strong>Google Play</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Rain Sounds. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create rain drops
+        function createRain() {
+            const container = document.getElementById('rainContainer');
+            const numberOfDrops = 100;
+
+            for (let i = 0; i < numberOfDrops; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                drop.style.opacity = Math.random() * 0.5 + 0.3;
+                container.appendChild(drop);
+            }
+        }
+
+        // Phone 3D effect
+        const phone = document.getElementById('phone');
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                phone.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        // Detect OS and highlight appropriate button
+        function detectOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const iosBtn = document.getElementById('iosBtn');
+            const androidBtn = document.getElementById('androidBtn');
+
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                iosBtn.classList.add('ios');
+                androidBtn.classList.remove('ios');
+            }
+        }
+
+        // Initialize
+        createRain();
+        detectOS();
+
+        // Rotate sounds in phone display
+        const sounds = [
+            { icon: '🌧️', title: 'Thunder Storm', subtitle: 'Rain Collection' },
+            { icon: '🌊', title: 'Ocean Waves', subtitle: 'Ocean Collection' },
+            { icon: '🔥', title: 'Fireplace', subtitle: 'Fire Collection' },
+            { icon: '🌲', title: 'Forest Rain', subtitle: 'Nature Collection' }
+        ];
+
+        let currentSound = 0;
+        setInterval(() => {
+            currentSound = (currentSound + 1) % sounds.length;
+            document.querySelector('.sound-icon').textContent = sounds[currentSound].icon;
+            document.querySelector('.sound-title').textContent = sounds[currentSound].title;
+            document.querySelector('.sound-subtitle').textContent = sounds[currentSound].subtitle;
+        }, 3000);
+    </script>
+</body>
+</html>
