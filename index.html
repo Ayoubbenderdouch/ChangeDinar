@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="My Apps - ChangeDinar, Rain Sounds, Athani Pro">
     <title>My Apps</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,119 +14,262 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0a192f 0%, #050c17 100%);
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
             min-height: 100vh;
             color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 119, 115, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(78, 205, 196, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(212, 175, 55, 0.2);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(116, 185, 255, 0.2);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: rgba(167, 139, 250, 0.2);
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(0, 100px) rotate(0deg); }
+            75% { transform: translate(-50px, 50px) rotate(-5deg); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
         }
 
         .subtitle {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
         .app-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px 30px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            border-radius: 32px;
+            padding: 45px 35px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .app-card:hover::before {
+            opacity: 1;
         }
 
         .app-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         /* ChangeDinar Card */
         .app-card.changedinar {
-            border-color: rgba(212, 175, 55, 0.3);
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.02) 100%);
+            border-color: rgba(212, 175, 55, 0.2);
         }
         .app-card.changedinar:hover {
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
-        }
-        .app-card.changedinar .app-icon {
-            background: linear-gradient(135deg, #d4af37, #f9d423);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2), 0 0 100px rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.4);
         }
         .app-card.changedinar .app-name {
-            color: #d4af37;
+            background: linear-gradient(135deg, #f9d423, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Rain Sounds Card */
         .app-card.rain-sounds {
-            border-color: rgba(116, 185, 255, 0.3);
+            background: linear-gradient(180deg, rgba(116, 185, 255, 0.12) 0%, rgba(116, 185, 255, 0.02) 100%);
+            border-color: rgba(116, 185, 255, 0.2);
         }
         .app-card.rain-sounds:hover {
-            box-shadow: 0 20px 40px rgba(116, 185, 255, 0.2);
-        }
-        .app-card.rain-sounds .app-icon {
-            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            box-shadow: 0 30px 60px rgba(116, 185, 255, 0.2), 0 0 100px rgba(116, 185, 255, 0.1);
+            border-color: rgba(116, 185, 255, 0.4);
         }
         .app-card.rain-sounds .app-name {
-            color: #74b9ff;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Athani Pro Card */
         .app-card.athani-pro {
-            border-color: rgba(167, 139, 250, 0.3);
+            background: linear-gradient(180deg, rgba(167, 139, 250, 0.12) 0%, rgba(167, 139, 250, 0.02) 100%);
+            border-color: rgba(167, 139, 250, 0.2);
         }
         .app-card.athani-pro:hover {
-            box-shadow: 0 20px 40px rgba(167, 139, 250, 0.2);
-        }
-        .app-card.athani-pro .app-icon {
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            box-shadow: 0 30px 60px rgba(167, 139, 250, 0.2), 0 0 100px rgba(167, 139, 250, 0.1);
+            border-color: rgba(167, 139, 250, 0.4);
         }
         .app-card.athani-pro .app-name {
-            color: #a78bfa;
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .app-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 24px;
-            margin: 0 auto 25px;
+            width: 110px;
+            height: 110px;
+            border-radius: 28px;
+            margin: 0 auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            object-fit: cover;
+        }
+
+        .app-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
 
         .app-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .app-description {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.95rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 30px;
+            line-height: 1.7;
         }
 
         .download-buttons {
@@ -139,88 +282,137 @@
         .download-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: 12px;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 16px;
             text-decoration: none;
             color: #fff;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .download-btn.ios {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .download-btn.ios:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .download-btn.android {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .download-btn.android:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
         }
 
         .download-btn.coming-soon {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: default;
         }
 
-        .download-btn svg {
-            width: 20px;
-            height: 20px;
+        .download-btn.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.7);
+        .download-btn svg {
+            width: 22px;
+            height: 22px;
         }
 
         footer {
             text-align: center;
-            margin-top: 80px;
-            padding: 30px;
-            color: rgba(255, 255, 255, 0.4);
+            margin-top: 100px;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.3);
             font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.8rem;
+                letter-spacing: -1px;
             }
 
             .apps-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .app-card {
-                padding: 30px 20px;
+                padding: 35px 25px;
             }
+
+            .container {
+                padding: 50px 20px;
+            }
+
+            header {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-card {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.1s; }
+        .app-card:nth-child(2) { animation-delay: 0.2s; }
+        .app-card:nth-child(3) { animation-delay: 0.3s; }
+
+        header {
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
 <body>
+    <div class="bg-gradient"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
     <div class="container">
         <header>
+            <span class="header-badge">iOS & Android Apps</span>
             <h1>My Apps</h1>
-            <p class="subtitle">Download my apps for iOS and Android</p>
+            <p class="subtitle">Beautiful, intuitive apps designed to make your life easier and more enjoyable</p>
         </header>
 
         <div class="apps-grid">
             <!-- ChangeDinar -->
             <div class="app-card changedinar">
-                <div class="app-icon"><img src="changedinaricon.png" alt="Change Dinar" style="width: 100%; height: 100%; border-radius: 24px;"></div>
+                <div class="app-icon">
+                    <img src="changedinaricon.png" alt="Change Dinar">
+                </div>
                 <h2 class="app-name">Change Dinar</h2>
                 <span class="badge">Currency Exchange</span>
                 <p class="app-description">Real-time EUR/USD to DZD exchange rates. Track the Algerian Dinar with live updates.</p>
@@ -242,7 +434,9 @@
 
             <!-- Rain Sounds -->
             <div class="app-card rain-sounds">
-                <div class="app-icon"><img src="rainsoundsicon.png" alt="Rain Sounds" style="width: 100%; height: 100%; border-radius: 24px;"></div>
+                <div class="app-icon">
+                    <img src="rainsoundsicon.png" alt="Rain Sounds">
+                </div>
                 <h2 class="app-name">Rain Sounds</h2>
                 <span class="badge">Sleep & Relaxing</span>
                 <p class="app-description">Fall asleep faster with calming nature sounds. Rain, ocean waves, fireplace and more.</p>
@@ -264,7 +458,9 @@
 
             <!-- Athani Pro -->
             <div class="app-card athani-pro">
-                <div class="app-icon">🕌</div>
+                <div class="app-icon">
+                    <span style="font-size: 3.5rem;">🕌</span>
+                </div>
                 <h2 class="app-name">Athani Pro</h2>
                 <span class="badge">Muslim Prayer</span>
                 <p class="app-description">Accurate prayer times, Adhan notifications, Qibla finder and Hijri calendar.</p>
