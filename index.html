@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="My Apps - ChangeDinar, Rain Sounds, Athani Pro">
-    <title>My Apps</title>
+    <meta name="description" content="My Apps & Client Work - Portfolio of Ayoub Benderdouch">
+    <title>My Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -94,7 +94,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
         }
 
         .header-badge {
@@ -127,6 +127,55 @@
             max-width: 500px;
             margin: 0 auto;
             line-height: 1.6;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .tab-btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(116, 185, 255, 0.3));
+            color: #fff;
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 10px 40px rgba(167, 139, 250, 0.2);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .apps-grid {
@@ -215,6 +264,22 @@
             background-clip: text;
         }
 
+        /* Client Work Card */
+        .app-card.client-work {
+            background: linear-gradient(180deg, rgba(255, 107, 129, 0.12) 0%, rgba(255, 107, 129, 0.02) 100%);
+            border-color: rgba(255, 107, 129, 0.2);
+        }
+        .app-card.client-work:hover {
+            box-shadow: 0 30px 60px rgba(255, 107, 129, 0.2), 0 0 100px rgba(255, 107, 129, 0.1);
+            border-color: rgba(255, 107, 129, 0.4);
+        }
+        .app-card.client-work .app-name {
+            background: linear-gradient(135deg, #ff6b81, #ee5a70);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .app-icon {
             width: 110px;
             height: 110px;
@@ -232,6 +297,11 @@
             height: 100%;
             border-radius: 28px;
             object-fit: cover;
+        }
+
+        .app-icon.website-icon {
+            background: linear-gradient(135deg, rgba(255, 107, 129, 0.3), rgba(255, 107, 129, 0.1));
+            font-size: 50px;
         }
 
         .app-icon::after {
@@ -314,6 +384,15 @@
             box-shadow: none;
         }
 
+        .download-btn.visit-site {
+            background: linear-gradient(135deg, rgba(255, 107, 129, 0.3), rgba(255, 107, 129, 0.1));
+            border-color: rgba(255, 107, 129, 0.3);
+        }
+
+        .download-btn.visit-site:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 129, 0.5), rgba(255, 107, 129, 0.2));
+        }
+
         .download-btn svg {
             width: 22px;
             height: 22px;
@@ -364,7 +443,18 @@
             }
 
             header {
-                margin-bottom: 50px;
+                margin-bottom: 30px;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .tab-btn {
+                width: 100%;
+                max-width: 280px;
             }
         }
 
@@ -402,88 +492,153 @@
 
     <div class="container">
         <header>
-            <span class="header-badge">iOS & Android Apps</span>
-            <h1>My Apps</h1>
-            <p class="subtitle">Beautiful, intuitive apps designed to make your life easier and more enjoyable</p>
+            <span class="header-badge">Developer & Designer</span>
+            <h1>My Portfolio</h1>
+            <p class="subtitle">Beautiful apps and websites designed to make your life easier</p>
         </header>
 
-        <div class="apps-grid">
-            <!-- ChangeDinar -->
-            <div class="app-card changedinar">
-                <div class="app-icon">
-                    <img src="changedinaricon.png" alt="Change Dinar">
-                </div>
-                <h2 class="app-name">Change Dinar</h2>
-                <span class="badge">Currency Exchange</span>
-                <p class="app-description">Real-time EUR/USD to DZD exchange rates. Track the Algerian Dinar with live updates.</p>
-                <div class="download-buttons">
-                    <a href="https://apps.apple.com/us/app/change-dinar/id6742030993" class="download-btn ios">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                        </svg>
-                        App Store
-                    </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.zaed.changedinar" class="download-btn android">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                        </svg>
-                        Google Play
-                    </a>
-                </div>
-            </div>
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="apps">My Apps</button>
+            <button class="tab-btn" data-tab="client-work">Client Work</button>
+        </div>
 
-            <!-- Rain Sounds -->
-            <div class="app-card rain-sounds">
-                <div class="app-icon">
-                    <img src="rainsoundsicon.png" alt="Rain Sounds">
+        <!-- My Apps Section -->
+        <div id="apps" class="tab-content active">
+            <div class="apps-grid">
+                <!-- ChangeDinar -->
+                <div class="app-card changedinar">
+                    <div class="app-icon">
+                        <img src="changedinaricon.png" alt="Change Dinar">
+                    </div>
+                    <h2 class="app-name">Change Dinar</h2>
+                    <span class="badge">Currency Exchange</span>
+                    <p class="app-description">Real-time EUR/USD to DZD exchange rates. Track the Algerian Dinar with live updates.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/us/app/change-dinar/id6742030993" class="download-btn ios">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            App Store
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.zaed.changedinar" class="download-btn android">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                            </svg>
+                            Google Play
+                        </a>
+                    </div>
                 </div>
-                <h2 class="app-name">Rain Sounds</h2>
-                <span class="badge">Sleep & Relaxing</span>
-                <p class="app-description">Fall asleep faster with calming nature sounds. Rain, ocean waves, fireplace and more.</p>
-                <div class="download-buttons">
-                    <a href="https://apps.apple.com/us/app/rain-sounds-sleep-relaxing/id6754724177" class="download-btn ios">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                        </svg>
-                        App Store
-                    </a>
-                    <a href="#" class="download-btn android coming-soon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                        </svg>
-                        Coming Soon
-                    </a>
-                </div>
-            </div>
 
-            <!-- Athani Pro -->
-            <div class="app-card athani-pro">
-                <div class="app-icon">
-                    <img src="athanologo.png" alt="Athani Pro">
+                <!-- Rain Sounds -->
+                <div class="app-card rain-sounds">
+                    <div class="app-icon">
+                        <img src="rainsoundsicon.png" alt="Rain Sounds">
+                    </div>
+                    <h2 class="app-name">Rain Sounds</h2>
+                    <span class="badge">Sleep & Relaxing</span>
+                    <p class="app-description">Fall asleep faster with calming nature sounds. Rain, ocean waves, fireplace and more.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/us/app/rain-sounds-sleep-relaxing/id6754724177" class="download-btn ios">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            App Store
+                        </a>
+                        <a href="#" class="download-btn android coming-soon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                            </svg>
+                            Coming Soon
+                        </a>
+                    </div>
                 </div>
-                <h2 class="app-name">Athani Pro</h2>
-                <span class="badge">Muslim Prayer</span>
-                <p class="app-description">Accurate prayer times, Adhan notifications, Qibla finder and Hijri calendar.</p>
-                <div class="download-buttons">
-                    <a href="https://apps.apple.com/us/app/athani-pro-muslim-prayer/id6745261280" class="download-btn ios">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                        </svg>
-                        App Store
-                    </a>
-                    <a href="#" class="download-btn android coming-soon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                        </svg>
-                        Coming Soon
-                    </a>
+
+                <!-- Athani Pro -->
+                <div class="app-card athani-pro">
+                    <div class="app-icon">
+                        <img src="athanologo.png" alt="Athani Pro">
+                    </div>
+                    <h2 class="app-name">Athani Pro</h2>
+                    <span class="badge">Muslim Prayer</span>
+                    <p class="app-description">Accurate prayer times, Adhan notifications, Qibla finder and Hijri calendar.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/us/app/athani-pro-muslim-prayer/id6745261280" class="download-btn ios">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            App Store
+                        </a>
+                        <a href="#" class="download-btn android coming-soon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                            </svg>
+                            Coming Soon
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Client Work Section -->
+        <div id="client-work" class="tab-content">
+            <div class="apps-grid">
+                <!-- ISRAA Collections -->
+                <div class="app-card client-work">
+                    <div class="app-icon website-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="60" height="60" style="opacity: 0.8;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </div>
+                    <h2 class="app-name">ISRAA Collections</h2>
+                    <span class="badge">E-Commerce</span>
+                    <p class="app-description">Online clothing store for women. Beautiful, modern design with a seamless shopping experience.</p>
+                    <div class="download-buttons">
+                        <a href="https://clothes-store-femme.vercel.app/" target="_blank" class="download-btn visit-site">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                            </svg>
+                            Visit Website
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Placeholder for more client work -->
+                <!-- You can add more client projects here -->
+            </div>
+        </div>
+
         <footer>
-            <p>&copy; 2026 All rights reserved.</p>
+            <p>&copy; 2026 Ayoub Benderdouch. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+
+                // Reset animations for cards in the new tab
+                const cards = document.getElementById(tabId).querySelectorAll('.app-card');
+                cards.forEach((card, index) => {
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = `fadeInUp 0.8s ease forwards ${index * 0.1}s`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
